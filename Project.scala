@@ -5,16 +5,15 @@ package csp.Project
 
 object Project {
   object MyParsersNoWhitespace {
-    import fastparse.all._
-    /
+    import fastparse.all.
+	  
     val digits : Parser[Int] = P (CharIn ('0' to '9').rep (1).!).map (s => s.toInt)
     val integer : Parser[Expr] = digits.map (n => CstI (n))
 
     val keywords : List[String] = List ("let", "in", "end", "quote")
     val alpha : Parser[String] = P ((CharIn ('A' to 'Z') | CharIn ('a' to 'z')).!)
     val ident : Parser[String] = P ((alpha ~ (alpha | CharIn ('0' to '9')).rep (0)).!).filter (s => !keywords.contains (s))
-    val variable : Parser[Expr] = ident.map (s => Var (s))
-    
+    val variable : Parser[Expr] = ident.map (s => Var (s))   
   }
 
   object MyParsers {
@@ -38,7 +37,7 @@ object Project {
     val sexpP: Parser[Sexp]   = P(numberP | boolP | symbolP | listP)
     val quoteP: Parser[Sexp]  = P("quote" ~ sexpP) 
     
-    //my project 
+    
     //val set := Parser[Unit] = P ("(" ~ "set" ~ "'" ~ ident ~ (integer|atom|string) ~ ")")
     // supposed to work this way in lisp:
     // (set x 1) should give output: x = 1;
@@ -63,25 +62,13 @@ object Project {
 	val digits : Parser[Int] = P (CharIn ('0' to '9').rep (1).!).map (s => s.toInt)
     val keywords : List[String] = List ("let", "in", "end")
     */
-    //val assign : Parser[String] = P (defvar)
-
-    
-    //val parens : Parser[Expr] = P (atom | ("(" ~ addSub ~ ")") | ("let" ~ ident ~ "=" ~ addSub ~ "in" ~ addSub ~ "end").map { case (x, erhs, ebody) => Let (x, erhs, ebody) })
-    //val mult : Parser[Sexp] = P (parens ~ ("*".! ~ parens).rep.map (s => s.toList)).map (foldAssocLeft)
-    //val addSub : Parser[Sexp] = P (mult ~ (("+" | "-").! ~ mult).rep.map (s => s.toList)).map (foldAssocLeft)
-    //val start : Parser[Expr] = P (addSub ~ End)
-    
-    
-
-    
-    //val alpha : Parser[String] = P ((CharIn ('A' to 'Z') | CharIn ('a' to 'z')).!)
     
     val start : Parser[Unit] = P (putYourStuffHere ~ End)
     val start1 : Parser[Unit] = P (quoteP ~ End)
     //val start2 : Parser[Unit] = P (string ~ End)
   }
   sealed trait Sexp
-  case class Slist (l : List[Sexp])					          extends Sexp
+  case class Slist (l : List[Sexp])		      extends Sexp
   case class Snum (val value : Int)                   extends Sexp
   case class Ssym (val vlaue : String)                extends Sexp
   case class Sbool (val value: Boolean)
@@ -119,16 +106,16 @@ object Project {
     val p01 : Parser[Unit] = MyParsers.start
     val p02 : Parser[Unit] = MyParsers.start1
     //val p03 : Parser[Unit] = MyParsers.start2
-    test (p01, "do some stuff here")
-
-    /*
-    (defun fatorial (n)
-  		(if (= n 1) 
-  			(1)							//if
-  			(* n (fatorial (- n 1)))	//else
-  		)
-  	)
-    */
+    test (p01, "(defun fatorial (n)
+  			(if (= n 1) 
+  				(1)							//if
+  				(* n (fatorial (- n 1)))	//else
+  			)
+  		)"
+    	 )
+	  
+    println ("=" * 80)
+	  
     test (p02, "quote (Hello World))")
     //test (p03, "(string 'hell 'o)")
 
