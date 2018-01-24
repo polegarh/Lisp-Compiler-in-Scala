@@ -1,4 +1,4 @@
-/*package csp.Project
+package csp.Project
 
 // From SBT: ~run-main csp.Project
 
@@ -135,4 +135,3 @@ object Project {
     println ("=" * 80)
   }
 }
-*/
