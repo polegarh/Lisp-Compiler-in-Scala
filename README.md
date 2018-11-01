@@ -5,7 +5,7 @@ This project includes several key steps:
 **Lexical analysis**
 
 *This is the initial part of reading and analysing the program text: The text is read 
-  and divided into tokens, each of which corresponds to a sym- bol in the programming 
+  and divided into tokens, each of which corresponds to a symbol in the programming 
   language, e.g., a variable name, keyword or number.*
   
 **Syntax Analysis**
@@ -23,7 +23,7 @@ This project includes several key steps:
     
 **Intermediate code generation**
     
-  *The program is translated to a simple machine- independent intermediate language.*
+  *The program is translated to a simple machine-independent intermediate language.*
   
 **Register allocation**
     
@@ -37,11 +37,15 @@ This project includes several key steps:
     
 **Assembly and linking**
     
- *The assembly-language code is translated into binary rep- resentation and addresses 
+ *The assembly-language code is translated into binary representation and addresses 
     of variables, functions, etc., are determined.*
 
 ### 2. Basic understanding of coding in lisp
-    It may be helpful to look at https://clisp.sourceforge.io/ or https://common-lisp.net/. 
+
+It may be helpful to look at: 
+* https://clisp.sourceforge.io/ 
+* https://common-lisp.net/. 
+
 ### 3. Code several easy programs in lisp       
 Hello World
     
